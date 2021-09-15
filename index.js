@@ -24,7 +24,7 @@ app.use("/posts", postRoutes);
 
 const CONNECTION_URL =
   "mongodb+srv://dbuser:admin@cluster0.uzsiu.mongodb.net/memories?retryWrites=true&w=majority";
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 mongoose
   .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
