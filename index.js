@@ -6,28 +6,28 @@
 //require("dotenv").config(); //works without type:module
 //?everytym a change is made
 //the filesnames in .gitignore wont be pushed to github
-import express from "express"; //"type":"module"
+//app.use(bodyParser.json({ limit: "30mb", extended: "true" })); images will be sent with a certain limit
+import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
-import postroutes from "./routes/posts.js";
-const app = express(); //we use the express methods on tht app instance
 
-app.use(bodyParser.json({ limit: "30mb", extended: "true" })); //images will be sent with a certain limit
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" })); //setting up the bodyParser
-app.use(cors()); //shd be before app.use()
+import postRoutes from "./routes/posts.js";
 
-app.use("/posts", postroutes); //every route inside postroutes starts with /posts
-const PORT = process.env.PORT || 4000; //PORT is an environment variable
+const app = express();
+
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors());
+
+app.use("/posts", postRoutes);
+
 const CONNECTION_URL =
-  "mongodb+srv://dbuser:admin@cluster0.uzsiu.mongodb.net/memories?retryWrites=true&w=majority";
+  "mongodb+srv://js_mastery:123123123@practice.jto9p.mongodb.net/test";
+const PORT = process.env.PORT || 5000;
+
 mongoose
-  .connect(CONNECTION_URL, {
-    //to prevent errors in the console
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  })
+  .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() =>
     app.listen(PORT, () =>
       console.log(`Server Running on Port: http://localhost:${PORT}`)
@@ -36,8 +36,3 @@ mongoose
   .catch((error) => console.log(`${error} did not connect`));
 
 mongoose.set("useFindAndModify", false);
-const connection = mongoose.connection;
-connection.once("open", () => {
-  //once the connection opens itll show tht msg
-  console.log("Mongodb connection established successfully");
-});
