@@ -21,9 +21,6 @@ app.use(express.json());
 dotenv.config();
 
 app.use("/posts", postroutes); //every route inside postroutes starts with /posts
-app.get("/", (req, res) => {
-  res.send("Helloo");
-}); //shd be in an .env file
 const port = process.env.PORT || 4000; //PORT is an environment variable
 
 mongoose
