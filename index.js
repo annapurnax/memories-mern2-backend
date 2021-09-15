@@ -16,7 +16,6 @@ const app = express(); //we use the express methods on tht app instance
 app.use(bodyParser.json({ limit: "30mb", extended: "true" })); //images will be sent with a certain limit
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" })); //setting up the bodyParser
 app.use(cors()); //shd be before app.use()
-app.use(express.json());
 
 app.use("/posts", postroutes); //every route inside postroutes starts with /posts
 const PORT = process.env.PORT || 4000; //PORT is an environment variable
