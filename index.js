@@ -11,23 +11,23 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import postroutes from "./routes/posts.js";
+import dotenv from "dotenv";
 const app = express(); //we use the express methods on tht app instance
 
 app.use(bodyParser.json({ limit: "30mb", extended: "true" })); //images will be sent with a certain limit
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" })); //setting up the bodyParser
 app.use(cors()); //shd be before app.use()
+app.use(express.json());
+dotenv.config();
 
 app.use("/posts", postroutes); //every route inside postroutes starts with /posts
 app.get("/", (req, res) => {
   res.send("Helloo");
-});
-const CONNECTION_URL =
-  "mongodb+srv://dbuser:admin@cluster0.uzsiu.mongodb.net/memories?retryWrites=true&w=majority"; //shd be in an .env file
+}); //shd be in an .env file
 const port = process.env.PORT || 4000; //PORT is an environment variable
-app.use(express.json());
 
 mongoose
-  .connect(CONNECTION_URL, {
+  .connect(process.env.CONNECTION_URL, {
     //to prevent errors in the console
     useNewUrlParser: true,
     useCreateIndex: true,
