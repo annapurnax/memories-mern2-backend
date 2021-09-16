@@ -21,7 +21,9 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/posts", postRoutes);
-
+app.get((req, res) => {
+  res.send("Yooo");
+});
 const CONNECTION_URL =
   "mongodb+srv://dbuser:admin@cluster0.uzsiu.mongodb.net/memories?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 4000;
